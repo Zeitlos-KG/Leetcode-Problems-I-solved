@@ -1,21 +1,16 @@
 class Solution {
 public:
+int gcd(int a, int b){
+    if(b==0) return a;
+    return gcd(b, a%b);
+}
     int gcdOfOddEvenSums(int n) {
         int sumOdd = 0;
         int sumEven = 0;
-        if (n == 1)
-            return 1;
-        for (int i = 1; i <= (2 * n); i++) {
-            if (i % 2 == 0)
-                sumEven += i;
-            else
-                sumOdd += i;
+        for(int i=1;i<=2*n;i+=2){
+            sumOdd+=i;
+            sumEven+=(i+1);
         }
-        int mini = min(sumOdd, sumEven);
-        while (mini--) {
-            if (sumOdd % mini == 0 && sumEven % mini == 0)
-                return mini;
-        }
-        return 1;
+        return gcd(sumOdd, sumEven);
     }
 };
